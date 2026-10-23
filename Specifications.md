@@ -13,7 +13,7 @@ int, float, str, bool. Say why.
 - **Inputs:** what values does the program read, in what order, and what
   type is each?
   1. card_type, int
-  2. balance, float
+  2. starting balance, float
   3. kind, int
   4. amount, int
       
@@ -34,8 +34,6 @@ State each rule in your own words, not the assignment's wording pasted back.
 For every boundary, write **both sides**: what happens exactly on it, and
 what happens just past it.
 
-- **What a ride costs:** the card type, then the interchange discount.
-  
   ### Card-type rules
   - Adult (1): fare = full fare
   - Student (2): fare = full fare / 2
@@ -52,17 +50,27 @@ what happens just past it.
   2. Apply interchange discount if applicable
 
 - **When a ride is refused:**
-  the balance is larger than 0
+  balance > 0 and balance - fare >= -35
 
 - **When a top-up is refused:**
+  amount % 50 != 0 and amount is not in the interval [50,1000] and balance + amount is larger than 3000
+  
 - **What a refused transaction changes, and what it does not:**
+  It adds 1 to refused and change follows_ride to False (interchange discount cannot be applied to the next ride) and add that transaction to the transactions history.
+  
 - **The lowest balance:**
+  At the beginning, the lowest_balance is equal to balance. If the balance after a transaction is lower than the previous lowest balance, update the lowest_balance to current balance.
+  
 - **The transaction history:** which transactions appear, their order and numbering, and what each line shows. How is this different from your chat history?
+  All the transactions appeared no matter accepted or refused. They are in list order atarting from 1. Each line shows the numbering, the transaction kind (ride / top-up),whether it is accepted or refused, and the balance after that transaction. In the chat history, the AI returns basically the same thing except that it uses < > rather than complete sentences.
 
 ## Edge cases
 
 The inputs where something special happens, and what the program must do in
 each. For example: a ride straight after a refused ride, or a top-up that
 lands exactly on 3000.
+1. can_ride: balance <= 0 and it returns false; balance - fare >= -35 and it returns true.
+2. can_top_up: amount % 50 != 0 or amount < 50 or amount > 1000 or balance + amount >3000 and it returns false
+3. ride_fare: if the previous transaction is a top-up or a refused ride, the interchange discount does not apply. If the fare is smaller than 1, the discount does not apply too.
 
 -
