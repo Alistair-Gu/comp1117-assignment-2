@@ -1,7 +1,20 @@
 def ride_fare(card_type, full_fare, follows_ride):
-    # Returns the fare for this ride, after the card type and the interchange discount.
-    pass  # your code here
-
+    # Apply the card-type rule first
+    if card_type == 1:
+        fare = full_fare
+    elif card_type == 2:
+        fare = full_fare / 2
+    elif card_type == 3:
+        if full_fare < 2:
+            fare = full_fare
+        else:
+            fare = 2
+    
+    # Then apply the interchange discount
+    if follows_ride and fare >= 1:
+        fare = fare - 1
+    
+    return fare
 
 def can_ride(balance, fare):
     # Returns True if the card accepts a ride costing fare, otherwise False.
@@ -9,9 +22,20 @@ def can_ride(balance, fare):
 
 
 def can_top_up(balance, amount):
-    # Returns True if the card accepts this top-up, otherwise False.
-    pass  # your code here
-
+    # Condition 1: amount must be a multiple of 50
+    if amount % 50 != 0:
+        return False
+    
+    # Condition 2: amount must be from 50 to 1000
+    if amount < 50 or amount > 1000:
+        return False
+    
+    # Condition 3: balance after adding must be 3000 or less
+    if balance + amount > 3000:
+        return False
+    
+    # All three conditions passed
+    return True
 
 def transaction_history(transactions):
     # Prints each recorded transaction in order. Returns nothing.
