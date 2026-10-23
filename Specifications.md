@@ -25,7 +25,7 @@ int, float, str, bool. Say why.
   4. fares paid, str
   5. lowest balance, str
   6. final balance, str
-  7. refused, str
+  7. refused, int
   money values are printed using "{:.2f}".format() to correct them to two decimal points.
 
 ## The rules in my own words
