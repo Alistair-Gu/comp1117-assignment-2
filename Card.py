@@ -17,8 +17,10 @@ def ride_fare(card_type, full_fare, follows_ride):
     return fare
 
 def can_ride(balance, fare):
-    # Returns True if the card accepts a ride costing fare, otherwise False.
-    pass  # your code here
+    if balance > 0 and balance - fare >= -35:
+        return True
+    else:
+        return False
 
 
 def can_top_up(balance, amount):
