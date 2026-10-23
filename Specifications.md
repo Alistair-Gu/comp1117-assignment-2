@@ -53,7 +53,7 @@ what happens just past it.
   balance > 0 and balance - fare >= -35
 
 - **When a top-up is refused:**
-  amount % 50 != 0 and amount is not in the interval [50,1000] and balance + amount is larger than 3000
+  amount % 50 != 0 or amount is not in the interval [50,1000] or balance + amount is larger than 3000
   
 - **What a refused transaction changes, and what it does not:**
   It adds 1 to refused and change follows_ride to False (interchange discount cannot be applied to the next ride) and add that transaction to the transactions history.
